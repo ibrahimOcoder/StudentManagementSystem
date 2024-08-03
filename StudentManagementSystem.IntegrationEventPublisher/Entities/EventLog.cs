@@ -1,12 +1,15 @@
-﻿using StudentManagementSystem.Admin.Types;
+﻿using StudentManagementSystem.IntegrationEventPublisher.Types;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StudentManagementSystem.Admin.Entities
+namespace StudentManagementSystem.IntegrationEventPublisher.Entities
 {
     [Table("EventLog")]
-    public class EventLog : EntityBase
+    public class EventLog
     {
+        [Key]
+        public long Id { get; set; }
+
         [Required]
         public EventTypes EventType { get; set; }
 

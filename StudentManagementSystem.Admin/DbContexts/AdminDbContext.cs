@@ -31,9 +31,6 @@ namespace StudentManagementSystem.Admin.DbContexts
             .HasMany(s => s.StudentCourses)
             .WithOne(sc => sc.Course)
             .HasForeignKey(sc => sc.CourseId);
-
-            modelBuilder.Entity<EventLog>()
-                .Property(p => p.EventBody).HasColumnType("jsonb");
         }
     }
 }

@@ -65,10 +65,14 @@ namespace StudentManagementSystem.Admin.Migrations
 
                     b.Property<string>("EventBody")
                         .IsRequired()
-                        .HasColumnType("jsonb");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EventType")
                         .HasColumnType("int");
+
+                    b.Property<string>("ExchangeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SoftDeleted")
                         .HasColumnType("bit");

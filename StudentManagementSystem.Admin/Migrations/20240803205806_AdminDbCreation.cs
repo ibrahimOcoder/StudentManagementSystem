@@ -34,9 +34,10 @@ namespace StudentManagementSystem.Admin.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EventType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventType = table.Column<int>(type: "int", nullable: false),
                     EventBody = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false),
+                    ExchangeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     SoftDeleted = table.Column<bool>(type: "bit", nullable: false),

@@ -12,7 +12,7 @@ using StudentManagementSystem.Admin.DbContexts;
 namespace StudentManagementSystem.Admin.Migrations
 {
     [DbContext(typeof(AdminDbContext))]
-    [Migration("20240730182552_AdminDbCreation")]
+    [Migration("20240803205806_AdminDbCreation")]
     partial class AdminDbCreation
     {
         /// <inheritdoc />
@@ -70,7 +70,10 @@ namespace StudentManagementSystem.Admin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EventType")
+                    b.Property<int>("EventType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExchangeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

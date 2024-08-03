@@ -23,7 +23,8 @@ namespace StudentManagementSystem.Admin.Services
             {
                 State = EventLogStates.Pending,
                 EventBody = JsonConvert.SerializeObject(student),
-                EventType = EventTypes.Add_Student
+                EventType = EventTypes.Add_Student,
+                ExchangeName = "CreateStudent"
             };
 
             await this._unitOfWork.Repository<EventLog>().Add(eventLog);

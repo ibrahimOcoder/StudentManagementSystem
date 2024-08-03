@@ -12,11 +12,12 @@ namespace StudentManagementSystem.Admin
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<AdminDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<AdminDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddAutoMapper(typeof(Program));
 
-            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IAdminService, AdminService>();
 
