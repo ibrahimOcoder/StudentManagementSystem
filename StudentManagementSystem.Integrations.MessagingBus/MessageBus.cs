@@ -33,7 +33,7 @@ namespace StudentManagementSystem.Integrations.MessagingBus
 
             await channel.BasicPublishAsync(exchangeName, "", body);
 
-            var queueName = (await channel.QueueDeclareAsync(durable:true)).QueueName;
+            var queueName = await channel.QueueDeclareAsync(queue: "CreateStudent", durable: true);
 
             await channel.QueueBindAsync(queue: queueName, exchange: exchangeName, routingKey: string.Empty);
         }

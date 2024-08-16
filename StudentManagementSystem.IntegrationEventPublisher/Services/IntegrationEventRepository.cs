@@ -22,17 +22,15 @@ namespace StudentManagementSystem.IntegrationEventPublisher.Services
             return await _dbContext.IntegrationEventLogEntries.Where(e => e.State == EventLogStates.Pending).ToListAsync();
         }
 
-        public async Task<int> UpdateIntegrationEventLogEntryState(EventLog entry, EventLogStates state)
+        public async Task UpdateIntegrationEventLogEntryState(EventLog entry, EventLogStates state)
         {
             await using var _dbContext = new IntegrationEventsDbContext(dbContextOptions);
             var entryInDatabase = await _dbContext.IntegrationEventLogEntries.Where(e => e.Id == entry.Id).FirstOrDefaultAsync();
             if (entryInDatabase is not null)
             {
                 entryInDatabase.State = state;
-                return await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
-            else
-                return 0;
         }
     }
 }

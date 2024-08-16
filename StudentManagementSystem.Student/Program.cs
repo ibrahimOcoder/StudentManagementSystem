@@ -1,8 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using StudentManagementSystem.Student.DbContexts;
+using StudentManagementSystem.Student.Helpers;
 using StudentManagementSystem.Student.Repositories;
 using StudentManagementSystem.Student.Services;
+using StudentManagementSystem.Student.Worker;
 
 namespace StudentManagementSystem.Student
 {
@@ -18,6 +20,9 @@ namespace StudentManagementSystem.Student
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IStudentService, StudentService>();
+
+            builder.Services.AddScoped<IServiceBusListenerHelper, ServiceBusListenerHelper>();
+            builder.Services.AddHostedService<ServiceBusListener>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

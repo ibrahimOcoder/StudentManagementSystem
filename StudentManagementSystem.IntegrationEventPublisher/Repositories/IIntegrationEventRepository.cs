@@ -7,6 +7,6 @@ namespace StudentManagementSystem.IntegrationEventPublisher.Repositories
     {
         Task<IEnumerable<EventLog>> GetUnpublishedEvents();
 
-        Task<int> UpdateIntegrationEventLogEntryState(EventLog entry, EventLogStates state);
+        Task UpdateIntegrationEventLogEntryState(EventLog entry, EventLogStates state);
     }
 }
