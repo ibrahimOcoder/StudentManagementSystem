@@ -21,29 +21,32 @@ namespace StudentManagementSystem.Student.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task.Delay(_configuration.GetValue<int>("InitialWaitTime"), stoppingToken);
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                using (var scope = _serviceScopeFactory.CreateScope())
+                await Task.Delay(_configuration.GetValue<int>("InitialWaitTime"), stoppingToken);
+                while (!stoppingToken.IsCancellationRequested)
                 {
-                    var factory = new ConnectionFactory { HostName = "localhost" };
-                    using var connection = await factory.CreateConnectionAsync();
-                    using var channel = await connection.CreateChannelAsync();
-
-                    await channel.ExchangeDeclareAsync(exchange: "CreateStudent", type: ExchangeType.Fanout, durable: true);
-
-                    var queueDeclareResult = await channel.QueueDeclareAsync(queue: "CreateStudent", durable: true);
-
-                    if (queueDeclareResult.MessageCount > 0)
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
+                        var factory = new ConnectionFactory { HostName = "localhost" };
+                        using var connection = await factory.CreateConnectionAsync();
+                        using var channel = await connection.CreateChannelAsync();
+
                         await channel.QueueBindAsync("CreateStudent", "CreateStudent", string.Empty);
 
                         var consumer = new AsyncEventingBasicConsumer(channel);
-                        consumer.Received += (model, ea) =>
+                        consumer.Received += async (model, ea) =>
                         {
-                            byte[] body = ea.Body.ToArray();
-                            var message = Encoding.UTF8.GetString(body);
-                            return null;
+                            try
+                            {
+                                byte[] body = ea.Body.ToArray();
+                                var message = Encoding.UTF8.GetString(body);
+                                await this.onReceive(message);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Error processing message: {ex.Message}");
+                            }
                         };
 
                         await channel.BasicConsumeAsync(queue: "CreateStudent", autoAck: true, consumer: consumer, stoppingToken);
@@ -51,9 +54,18 @@ namespace StudentManagementSystem.Student.Worker
                         var serviceBusListenerHelper = scope.ServiceProvider.GetRequiredService<IStudentService>();
                         //await serviceBusListenerHelper.AddStudent(null);
                     }
+                    await Task.Delay(_configuration.GetValue<int>("CheckUpdateTime"), stoppingToken);
                 }
-                await Task.Delay(_configuration.GetValue<int>("CheckUpdateTime"), stoppingToken);
             }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private Task onReceive(string message)
+        {
+            return null;
         }
     }
 }

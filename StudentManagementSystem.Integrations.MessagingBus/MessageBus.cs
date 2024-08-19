@@ -5,6 +5,7 @@ using StudentManagementSystem.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,21 +22,33 @@ namespace StudentManagementSystem.Integrations.MessagingBus
 
         public async Task PublishMessage(IntegrationBaseMessage message, string exchangeName)
         {
-            var factory = new ConnectionFactory { HostName = "localhost" };
-            using var connection = await factory.CreateConnectionAsync();
-            using var channel = await connection.CreateChannelAsync();
+            try
+            {
+                var factory = new ConnectionFactory { HostName = "localhost" };
+                using var connection = await factory.CreateConnectionAsync();
+                using var channel = await connection.CreateChannelAsync();
 
-            await channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Fanout, durable: true);
+                await channel.ExchangeDeclareAsync(exchange: exchangeName, type: ExchangeType.Fanout, durable: true);
 
-            var jsonMessage = JsonConvert.SerializeObject(message);
+                var args = new Dictionary<string, object>
+                {
+                    { "x-message-ttl", 60000 }
+                };
 
-            var body = Encoding.UTF8.GetBytes(jsonMessage);
+                var queueName = await channel.QueueDeclareAsync(queue: "CreateStudent", durable: true, exclusive: false, autoDelete: false, args);
 
-            await channel.BasicPublishAsync(exchangeName, "", body);
+                await channel.QueueBindAsync(queue: queueName, exchange: exchangeName, routingKey: string.Empty);
 
-            var queueName = await channel.QueueDeclareAsync(queue: "CreateStudent", durable: true);
+                var jsonMessage = JsonConvert.SerializeObject(message);
 
-            await channel.QueueBindAsync(queue: queueName, exchange: exchangeName, routingKey: string.Empty);
+                var body = Encoding.UTF8.GetBytes(jsonMessage);
+
+                await channel.BasicPublishAsync(exchangeName, "", body);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
