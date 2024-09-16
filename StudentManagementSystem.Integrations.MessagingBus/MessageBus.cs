@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
-using StudentManagementSystem.Messages;
+using StudentManagementSystem.CommunicationConfigs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

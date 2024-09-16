@@ -1,5 +1,5 @@
 ﻿using StudentManagementSystem.Admin.Entities;
-using StudentManagementSystem.Messages;
+using StudentManagementSystem.CommunicationConfigs;
 
 namespace StudentManagementSystem.Admin.Messages
 {

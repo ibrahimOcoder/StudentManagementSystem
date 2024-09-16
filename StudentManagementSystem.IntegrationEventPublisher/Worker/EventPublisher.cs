@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
+using StudentManagementSystem.CommunicationConfigs;
 using StudentManagementSystem.IntegrationEventPublisher.Repositories;
 using StudentManagementSystem.IntegrationEventPublisher.Types;
 using StudentManagementSystem.Integrations.MessagingBus;
-using StudentManagementSystem.Messages;
 using System.Configuration;
 
 namespace StudentManagementSystem.IntegrationEventPublisher.Worker

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StudentManagementSystem.Messages
+namespace StudentManagementSystem.CommunicationConfigs
 {
     public class IntegrationBaseMessage
     {

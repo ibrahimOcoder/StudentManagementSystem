@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.Integrations.MessagingBus", "StudentManagementSystem.Integrations.MessagingBus\StudentManagementSystem.Integrations.MessagingBus.csproj", "{42F970B6-2DFE-432B-BDEB-3B303FCCB40D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.Messages", "StudentManagementSystem.Messages\StudentManagementSystem.Messages.csproj", "{0DDA7CCD-E886-464C-8258-2C9ADCCE5728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.CommunicationConfigs", "StudentManagementSystem.Messages\StudentManagementSystem.CommunicationConfigs.csproj", "{0DDA7CCD-E886-464C-8258-2C9ADCCE5728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.RabbitMQConnectionFactory", "StudentManagementSystem.RabbitMQConnectionFactory\StudentManagementSystem.RabbitMQConnectionFactory.csproj", "{40842AE5-3560-42AE-9996-DE6FA5AB6C7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{0DDA7CCD-E886-464C-8258-2C9ADCCE5728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DDA7CCD-E886-464C-8258-2C9ADCCE5728}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DDA7CCD-E886-464C-8258-2C9ADCCE5728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40842AE5-3560-42AE-9996-DE6FA5AB6C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40842AE5-3560-42AE-9996-DE6FA5AB6C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40842AE5-3560-42AE-9996-DE6FA5AB6C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40842AE5-3560-42AE-9996-DE6FA5AB6C7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{42F970B6-2DFE-432B-BDEB-3B303FCCB40D} = {67AAC796-6F3D-4D6E-855D-68AD232B3CE2}
 		{0DDA7CCD-E886-464C-8258-2C9ADCCE5728} = {67AAC796-6F3D-4D6E-855D-68AD232B3CE2}
+		{40842AE5-3560-42AE-9996-DE6FA5AB6C7E} = {67AAC796-6F3D-4D6E-855D-68AD232B3CE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43492E88-10EE-4D1B-BCBB-15EC94ED095C}
